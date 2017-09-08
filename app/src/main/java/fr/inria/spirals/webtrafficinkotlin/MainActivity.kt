@@ -31,6 +31,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val httpRequestBisButton: Button = findViewById(R.id.http_request_bis_button)
+        httpRequestBisButton.setOnClickListener {
+            doAsync {
+                try {
+                    val result = URL("http://flickr.com").readText()
+                    uiThread { toast("HTTP Bis OK") }
+                    Log.d(TAG, "result=$result")
+                } catch (e: Exception) {
+                    uiThread { toast("HTTP Bis Failed") }
+                    Log.e(TAG, e.message)
+                }
+            }
+        }
+
         val httpsRequestButton : Button = findViewById(R.id.https_request_button)
         httpsRequestButton.setOnClickListener {
             doAsync {
@@ -40,6 +54,20 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "result=$result")
                 } catch (e: Exception) {
                     uiThread { toast("HTTPS Failed") }
+                    Log.e(TAG, e.message)
+                }
+            }
+        }
+
+        val httpsRequestBisButton : Button = findViewById(R.id.https_request_bis_button)
+        httpsRequestBisButton.setOnClickListener {
+            doAsync {
+                try {
+                    val result = URL("https://flickr.com").readText()
+                    uiThread { toast("HTTPS Bis OK") }
+                    Log.d(TAG, "result=$result")
+                } catch (e: Exception) {
+                    uiThread { toast("HTTPS Bis Failed") }
                     Log.e(TAG, e.message)
                 }
             }
